@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\EmployeeRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -30,6 +32,23 @@ class Employee
     #[ORM\ManyToOne(inversedBy: 'employees')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Store $store = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $public_image_id = null;
+
+    /**
+     * @var Collection<int, EmployeeAchievement>
+     */
+    #[ORM\OneToMany(targetEntity: EmployeeAchievement::class, mappedBy: 'employee')]
+    private Collection $employeeAchievements;
+
+    #[ORM\Column(length: 255)]
+    private ?string $full_name = null;
+
+    public function __construct()
+    {
+        $this->employeeAchievements = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -92,6 +111,60 @@ class Employee
     public function setStore(?Store $store): static
     {
         $this->store = $store;
+
+        return $this;
+    }
+
+    public function getPublicImageId(): ?string
+    {
+        return $this->public_image_id;
+    }
+
+    public function setPublicImageId(string $public_image_id): static
+    {
+        $this->public_image_id = $public_image_id;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, EmployeeAchievement>
+     */
+    public function getEmployeeAchievements(): Collection
+    {
+        return $this->employeeAchievements;
+    }
+
+    public function addEmployeeAchievement(EmployeeAchievement $employeeAchievement): static
+    {
+        if (!$this->employeeAchievements->contains($employeeAchievement)) {
+            $this->employeeAchievements->add($employeeAchievement);
+            $employeeAchievement->setEmployee($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEmployeeAchievement(EmployeeAchievement $employeeAchievement): static
+    {
+        if ($this->employeeAchievements->removeElement($employeeAchievement)) {
+            // set the owning side to null (unless already changed)
+            if ($employeeAchievement->getEmployee() === $this) {
+                $employeeAchievement->setEmployee(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getFullName(): ?string
+    {
+        return $this->full_name;
+    }
+
+    public function setFullName(string $full_name): static
+    {
+        $this->full_name = $full_name;
 
         return $this;
     }

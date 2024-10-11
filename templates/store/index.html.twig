@@ -3,15 +3,16 @@
 {% block title %}Store index{% endblock %}
 
 {% block body %}
-    <h1>Store index</h1>
+
+    <h1>Tiendas</h1>
 
     <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>actions</th>
-            </tr>
+        <thead class="table-primary">
+        <tr>
+            <th>Identificador</th>
+            <th>Tienda</th>
+            <th>Acciones</th>
+        </tr>
         </thead>
         <tbody>
         {% for store in stores %}

@@ -23,6 +23,10 @@ class EmployeeAchievement
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $achievement_date = null;
 
+    #[ORM\ManyToOne(inversedBy: 'employeeAchievements')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Employee $employee = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -60,6 +64,18 @@ class EmployeeAchievement
     public function setAchievementDate(\DateTimeInterface $achievement_date): static
     {
         $this->achievement_date = $achievement_date;
+
+        return $this;
+    }
+
+    public function getEmployee(): ?Employee
+    {
+        return $this->employee;
+    }
+
+    public function setEmployee(?Employee $employee): static
+    {
+        $this->employee = $employee;
 
         return $this;
     }

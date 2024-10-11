@@ -1,3 +1,4 @@
-body {
-    background-color: skyblue;
+img {
+    max-width: 150px;
+    height: auto;
 }
