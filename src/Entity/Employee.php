@@ -7,6 +7,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 #[ORM\Entity(repositoryClass: EmployeeRepository::class)]
 class Employee
@@ -17,6 +19,7 @@ class Employee
     private ?int $id = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Assert\NotBlank]
     private ?\DateTimeInterface $birth_date = null;
 
     #[ORM\Column(length: 255)]
@@ -24,13 +27,17 @@ class Employee
 
     #[ORM\ManyToOne(inversedBy: 'employees')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Assert\NotBlank]
     private ?Positions $position = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 18, scale: 2)]
+    #[Assert\NotBlank(message: 'El salario es requerido')]
+    #[Assert\Range(min: 1, minMessage: 'El salario debe ser al menos de Q3,000.00')]
     private ?string $salary = null;
 
     #[ORM\ManyToOne(inversedBy: 'employees')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Assert\NotBlank]
     private ?Store $store = null;
 
     #[ORM\Column(length: 255)]
@@ -43,6 +50,8 @@ class Employee
     private Collection $employeeAchievements;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'El nombre es requerido')]
+    #[Assert\Length(min: 1, max: 100, maxMessage: 'Máximo 100 cáracteres')]
     private ?string $full_name = null;
 
     public function __construct()
