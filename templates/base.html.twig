@@ -16,7 +16,8 @@
     </head>
     <body>
 
-    {% if app.request.attributes.get('_route') != 'app_employee_pdf_index' %}
+    {% set excludedRoutes = ['app_employee_pdf_index', 'app_store_pdf_index', 'app_employee_achievement_all_pdf', 'app_employee_achievements_pdf'] %}
+    {% if app.request.attributes.get('_route') not in excludedRoutes %}
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
             <div class="container-fluid">
                 <a class="navbar-brand">Intelafix</a>

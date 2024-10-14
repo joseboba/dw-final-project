@@ -3,14 +3,14 @@
 {% block title %}EmployeeAchievement index{% endblock %}
 
 {% block body %}
-    <h1>EmployeeAchievement index</h1>
+    <h1>Actividades de {{ employee.fullName }}</h1>
 
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Description</th>
-                <th>Achievement_type</th>
+                <th>Actividad</th>
                 <th>Achievement_date</th>
                 <th>actions</th>
             </tr>
@@ -20,11 +20,10 @@
             <tr>
                 <td>{{ employee_achievement.id }}</td>
                 <td>{{ employee_achievement.description }}</td>
-                <td>{{ employee_achievement.achievementType ? 'Yes' : 'No' }}</td>
+                <td>{{ employee_achievement.achievementType ? 'Logro' : 'Llamada de atención' }}</td>
                 <td>{{ employee_achievement.achievementDate ? employee_achievement.achievementDate|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
-                    <a href="{{ path('app_employee_achievement_show', {'id': employee_achievement.id}) }}">show</a>
-                    <a href="{{ path('app_employee_achievement_edit', {'id': employee_achievement.id}) }}">edit</a>
+                    {{ include('employee_achievement/_delete_form.html.twig') }}
                 </td>
             </tr>
         {% else %}
@@ -35,5 +34,6 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_employee_achievement_new') }}">Create new</a>
+    <a href="{{ path('app_employee_achievement_new', {'employee_id': employee.id}) }}">Create new</a>
+    <a href="{{ path('app_employee_index') }}">Regresar</a>
 {% endblock %}

@@ -7,6 +7,8 @@ use App\Form\EmployeeAchievementType;
 use App\Repository\EmployeeAchievementRepository;
 use App\Repository\EmployeeRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,11 +17,117 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/employee/achievement')]
 final class EmployeeAchievementController extends AbstractController
 {
-    #[Route(name: 'app_employee_achievement_index', methods: ['GET'])]
-    public function index(EmployeeAchievementRepository $employeeAchievementRepository): Response
+    #[Route('/list/{employeeId}',name: 'app_employee_achievement_index', methods: ['GET'])]
+    public function index(int $employeeId, EmployeeAchievementRepository $employeeAchievementRepository, EmployeeRepository $employeeRepository): Response
     {
+        $employee = $employeeRepository->findOneBy(['id' => $employeeId]);
+
         return $this->render('employee_achievement/index.html.twig', [
-            'employee_achievements' => $employeeAchievementRepository->findAll(),
+            'employee_achievements' => $employeeAchievementRepository->findBy(['employee' => $employeeId]),
+            'employee' => $employee,
+        ]);
+    }
+
+    #[Route('/pdf-general', name: 'app_employee_achievement_all_pdf', methods: ['GET'])]
+    public function generateGeneralPdf(EmployeeAchievementRepository $employeeAchievementRepository): Response
+    {
+        $options = new Options();
+        $options->set('defaultFont', 'Arial');
+        $options->set('isRemoteEnabled', true);
+        $dompdf = new Dompdf($options);
+
+
+        $activities = $employeeAchievementRepository
+            ->createQueryBuilder('ea')
+            ->join('ea.employee', 'e')
+            ->addSelect('e')
+            ->orderBy('e.full_name', 'ASC')
+            ->addOrderBy('ea.achievement_type', 'DESC')
+            ->getQuery()
+            ->getResult();
+
+        $html = $this->renderView('employee_achievement/actividades-empleados-pdf.html.twig', [
+            'activities' => $activities,
+            'type'=> ''
+        ]);
+
+
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->render();
+
+        return new Response($dompdf->output(), 200, [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'attachment; filename="actividades-empleados.pdf"',
+        ]);
+    }
+
+    #[Route('/pdf-achievements', name: 'app_employee_achievements_pdf', methods: ['GET'])]
+    public function generateAchievementsPdf(EmployeeAchievementRepository $employeeAchievementRepository): Response
+    {
+        $options = new Options();
+        $options->set('defaultFont', 'Arial');
+        $options->set('isRemoteEnabled', true);
+        $dompdf = new Dompdf($options);
+
+
+        $activities = $employeeAchievementRepository
+            ->createQueryBuilder('ea')
+            ->join('ea.employee', 'e')
+            ->addSelect('e')
+            ->where('ea.achievement_type = 1')
+            ->orderBy('e.full_name', 'ASC')
+            ->addOrderBy('ea.achievement_date', 'DESC')
+            ->getQuery()
+            ->getResult();
+
+        $html = $this->renderView('employee_achievement/actividades-empleados-pdf.html.twig', [
+            'activities' => $activities,
+            'type'=> 'logros'
+        ]);
+
+
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->render();
+
+        return new Response($dompdf->output(), 200, [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'attachment; filename="logros-empleados.pdf"',
+        ]);
+    }
+
+    #[Route('/pdf-warnings', name: 'app_employee_warnings_pdf', methods: ['GET'])]
+    public function generateWarningsPdf(EmployeeAchievementRepository $employeeAchievementRepository): Response
+    {
+        $options = new Options();
+        $options->set('defaultFont', 'Arial');
+        $options->set('isRemoteEnabled', true);
+        $dompdf = new Dompdf($options);
+
+        $activities = $employeeAchievementRepository
+            ->createQueryBuilder('ea')
+            ->join('ea.employee', 'e')
+            ->addSelect('e')
+            ->where('ea.achievement_type = 0')
+            ->orderBy('e.full_name', 'ASC')
+            ->addOrderBy('ea.achievement_date', 'DESC')
+            ->getQuery()
+            ->getResult();
+
+        $html = $this->renderView('employee_achievement/actividades-empleados-pdf.html.twig', [
+            'activities' => $activities,
+            'type'=> 'llamadas de atencion'
+        ]);
+
+
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->render();
+
+        return new Response($dompdf->output(), 200, [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'attachment; filename="llamadas-atencion-empleados.pdf"',
         ]);
     }
 
@@ -42,12 +150,13 @@ final class EmployeeAchievementController extends AbstractController
             $entityManager->persist($employeeAchievement);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_employee_achievement_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_employee_achievement_index', ['employeeId' => $request->get('employee_id')], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('employee_achievement/new.html.twig', [
             'employee_achievement' => $employeeAchievement,
             'form' => $form,
+            'employeeId' => $request->get('employee_id'),
         ]);
     }
 
@@ -85,6 +194,6 @@ final class EmployeeAchievementController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_employee_achievement_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_employee_achievement_index', ['employeeId' => $request->get('employeeId')], Response::HTTP_SEE_OTHER);
     }
 }

@@ -6,7 +6,6 @@ use App\Entity\Employee;
 use App\Form\EmployeeType;
 use App\Repository\EmployeeRepository;
 use App\Service\CloudinaryService;
-use Cloudinary\Api\Upload\UploadApi;
 use Doctrine\ORM\EntityManagerInterface;
 use Dompdf\Dompdf;
 use Dompdf\Options;

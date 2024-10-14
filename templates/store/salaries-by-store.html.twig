@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Listado de salarios por tienda{% endblock %}
+
+{% block body %}
+    <body>
+    <h1>Salarios por tienda: {{ store.name }}</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>Fotografía</th>
+            <th>Codigo de empleado</th>
+            <th>Nombre</th>
+            <th>Salario</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for empleado in salaries %}
+            <tr>
+                <td><img src="{{ empleado.pictureUrl }}" alt="Foto" style="width: 50px; height: auto;"></td>
+                <td>{{ empleado.id }}</td>
+                <td>{{ empleado.fullName }}</td>
+                <td>{{ empleado.salary | format_currency('GTQ') }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </body>
+{% endblock %}

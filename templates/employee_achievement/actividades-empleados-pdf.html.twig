@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Actividades {{ type }}{% endblock %}
+{% block body %}
+    <head>
+        <meta charset="utf-8">
+        <title>Lista de Empleados</title>
+        <style>
+            body {
+                font-family: sans-serif;
+            }
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+
+            table, th, td {
+                border: 1px solid black;
+            }
+
+            th, td {
+                padding: 8px;
+                text-align: left;
+            }
+        </style>
+    </head>
+    <body>
+    <h1>Lista de actividades de Empleados</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>Fotografía</th>
+            <th>Nombre</th>
+            <th>Actividad</th>
+            <th>Fecha y Hora de Actividad</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for actividad in activities %}
+            <tr>
+                <td><img src="{{ actividad.employee.pictureUrl }}" alt="Foto" style="width: 50px; height: auto;"></td>
+                <td>{{ actividad.employee.fullName }}</td>
+                <td>{{ actividad.achievementType ? 'Logro' : 'Llamada de atención' }}</td>
+                <td>{{ actividad.achievementDate|date('d/m/Y H:m:s') }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </body>
+{% endblock %}
