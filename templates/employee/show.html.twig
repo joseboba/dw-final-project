@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Employee{% endblock %}
+
+{% block body %}
+    <h1>Employee</h1>
+
+    <table class="table">
+        <tbody>
+        <tr>
+            <th>Picture_url</th>
+            <td><img src="{{ employee.pictureUrl }}" alt="" /></td>
+        </tr>
+            <tr>
+                <th>Id</th>
+                <td>{{ employee.id }}</td>
+            </tr>
+            <tr>
+                <th>Birth_date</th>
+                <td>{{ employee.birthDate ? employee.birthDate|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Salary</th>
+                <td>{{ employee.salary }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_employee_index') }}">back to list</a>
+
+    <a href="{{ path('app_employee_edit', {'id': employee.id}) }}">edit</a>
+
+    {{ include('employee/_delete_form.html.twig') }}
+{% endblock %}

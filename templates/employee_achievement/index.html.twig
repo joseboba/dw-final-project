@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}EmployeeAchievement index{% endblock %}
+
+{% block body %}
+    <h1>EmployeeAchievement index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Description</th>
+                <th>Achievement_type</th>
+                <th>Achievement_date</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for employee_achievement in employee_achievements %}
+            <tr>
+                <td>{{ employee_achievement.id }}</td>
+                <td>{{ employee_achievement.description }}</td>
+                <td>{{ employee_achievement.achievementType ? 'Yes' : 'No' }}</td>
+                <td>{{ employee_achievement.achievementDate ? employee_achievement.achievementDate|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_employee_achievement_show', {'id': employee_achievement.id}) }}">show</a>
+                    <a href="{{ path('app_employee_achievement_edit', {'id': employee_achievement.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_employee_achievement_new') }}">Create new</a>
+{% endblock %}
