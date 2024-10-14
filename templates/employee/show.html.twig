@@ -9,19 +9,31 @@
         <tbody>
         <tr>
             <th>Picture_url</th>
-            <td><img src="{{ employee.pictureUrl }}" alt="" /></td>
+            <td><img src="{{ employee.pictureUrl }}" class="img-fluid" alt="" /></td>
         </tr>
             <tr>
                 <th>Id</th>
                 <td>{{ employee.id }}</td>
             </tr>
+           <tr>
+               <th>Nombre</th>
+               <td>{{ employee.fullName }}</td>
+           </tr>
             <tr>
                 <th>Birth_date</th>
-                <td>{{ employee.birthDate ? employee.birthDate|date('Y-m-d') : '' }}</td>
+                <td>{{ employee.birthDate ? employee.birthDate|date('d/m/Y') : '' }}</td>
             </tr>
             <tr>
                 <th>Salary</th>
-                <td>{{ employee.salary }}</td>
+                <td>{{ employee.salary | format_currency('GTQ') }}</td>
+            </tr>
+            <tr>
+                <th>Tienda</th>
+                <td>{{ employee.store.name }}</td>
+            </tr>
+            <tr>
+                <th>Puesto</th>
+                <td>{{ employee.position.name }}</td>
             </tr>
         </tbody>
     </table>
