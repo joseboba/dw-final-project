@@ -13,6 +13,7 @@ class StoreType extends AbstractType
     {
         $builder
             ->add('name',null, [
+                'label' => 'Nombre',
                 'attr' => [
                     'class' => 'form-control'
                 ]
