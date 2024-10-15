@@ -1,4 +1,120 @@
-img {
+/* img {
     max-width: 150px;
     height: auto;
+} */
+
+body {
+    background-color: #ECEFF1;
+    height: 100vh;
+    font-family: "Segoe UI" !important; 
+
+    nav {
+        background-color: #173341;
+        color: white !important;
+        font-weight: bold;
+    }
+}
+
+h1 {
+    color: black;
+    font-weight: bold;
+}
+
+h2 {
+    color: black;
+    font-weight: bold;
+}
+
+#main {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-direction: column;
+}
+
+#carouselExample {
+    width: 50%;
+} 
+
+table {
+    margin-top: 30px;
+    border: 4px solid black;
+
+    th {
+        text-align: center !important;
+        color: white;
+        background-color: #173341 !important;
+    }
+
+    tr, td {
+        background-color: white !important;
+    }
+}
+
+.form-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        button {
+            width: 157.6px;
+            color: white;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+    }
+}
+
+.button-container {
+    display: flex;
+    gap: 22px;
+
+    button {
+        background-color: #173341 !important;
+    }
+
+    a {
+        text-decoration: none;
+        color:white;
+        font-weight: bold;
+    }
+}
+
+.not-found-data {
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px;
+
+    img {
+        height: 328px !important;
+        border-radius: 40px;
+    }
+
+    p {
+        font-size: 27px;
+        color: black;
+        font-weight: bold;
+    }
+}
+
+.input {
+    margin-top: 20px;
+    margin-bottom: 10px !important;
+
+    input {
+        width: 300px !important;
+    }
+}
+
+.buttons {
+    background-color: #173341 !important;
 }

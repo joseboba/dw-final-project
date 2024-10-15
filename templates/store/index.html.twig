@@ -6,8 +6,9 @@
 
     <h1>Tiendas</h1>
 
-    <table class="table">
-        <thead class="table-primary">
+    {% if stores|length > 0 %}
+        <table class="table table-hover">
+        <thead>
         <tr>
             <th>Identificador</th>
             <th>Tienda</th>
@@ -26,17 +27,25 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="3">no records found</td>
+                <td colspan="3">No se encontraron registros</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
+    {% else %}
+        <div class="not-found-data">
+            <img src="{{ asset('images/store.png') }}" alt="No se encontraron registros">
+            <p>No hay tiendas registradas.</p>
+        </div>
+    {% endif %}
 
-    <div>
-        <a href="{{ path('app_store_new') }}">Create new</a>
+    <div class="button-container">
+        <button type="button" class="btn btn-dark">
+         <a href="{{ path('app_store_new') }}">Ingresar tienda</a>
+        </button>
+         <button type="button" class="btn btn-dark">
+          <a href="{{ path('app_index') }}"> Regresar </a>
+        </button>
     </div>
-    <div>
-        <a href="{{ path('app_index') }}"> Regresar </a>
-    </div>
-
+    
 {% endblock %}

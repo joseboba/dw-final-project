@@ -1,4 +1,15 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+
+   <div class="input">
+        {{ "Nombre" }}
+        {{ form_widget(form.name) }}
+
+        {% if form.name.vars.errors|length > 0 %}
+            <div class="alert alert-danger pb-0 mt-2">
+                {{ form_errors(form.name) }}
+            </div>
+        {% endif %}
+    </div>
+    
+    <button type="button" class="btn btn-dark" style="margin-top: 20px">{{ button_label|default('Guardar') }}</button>
 {{ form_end(form) }}
