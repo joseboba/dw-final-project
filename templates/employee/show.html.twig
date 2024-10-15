@@ -38,9 +38,15 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_employee_index') }}">back to list</a>
-
-    <a href="{{ path('app_employee_edit', {'id': employee.id}) }}">edit</a>
+    <div>
+        <a href="{{ path('app_employee_index') }}">back to list</a>
+    </div>
+    <div>
+        <a href="{{ path('app_employee_edit', {'id': employee.id}) }}">edit</a>
+    </div>
+    <div>
+        <a href="{{ path('app_employee_detail_pdf', {'id': employee.id}) }}">Reporte detalle</a>
+    </div>
 
     {{ include('employee/_delete_form.html.twig') }}
 {% endblock %}

@@ -21,7 +21,7 @@
                 <td>{{ employee_achievement.id }}</td>
                 <td>{{ employee_achievement.description }}</td>
                 <td>{{ employee_achievement.achievementType ? 'Logro' : 'Llamada de atención' }}</td>
-                <td>{{ employee_achievement.achievementDate ? employee_achievement.achievementDate|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ employee_achievement.achievementDate ? employee_achievement.achievementDate|date('H:m:s d/m/Y') : '' }}</td>
                 <td>
                     {{ include('employee_achievement/_delete_form.html.twig') }}
                 </td>

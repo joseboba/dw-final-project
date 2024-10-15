@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Employee;
 use App\Form\EmployeeType;
+use App\Repository\EmployeeAchievementRepository;
 use App\Repository\EmployeeRepository;
 use App\Service\CloudinaryService;
 use Doctrine\ORM\EntityManagerInterface;
@@ -53,6 +54,31 @@ final class EmployeeController extends AbstractController
             'Content-Disposition' => 'attachment; filename="empleados.pdf"',
         ]);
     }
+
+    #[Route('/pdf-detail/{id}', name: 'app_employee_detail_pdf', methods: ['GET'])]
+    public function generateDetailPdf(int $id, EmployeeRepository $employeeRepository): Response
+    {
+        $options = new Options();
+        $options->set('defaultFont', 'Arial');
+        $options->set('isRemoteEnabled', true);
+        $dompdf = new Dompdf($options);
+
+        $empleado = $employeeRepository->findOneBy(['id' => $id]);
+
+        $html = $this->renderView('employee/empleados-detail-pdf.html.twig', [
+            'empleado' => $empleado,
+            'activities' => $empleado->getEmployeeAchievements(),
+        ]);
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->render();
+
+        return new Response($dompdf->output(), 200, [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'attachment; filename="empleado-detalle.pdf"',
+        ]);
+    }
+
 
     #[Route('/new', name: 'app_employee_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response

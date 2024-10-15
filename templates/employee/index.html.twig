@@ -25,9 +25,15 @@
                 <td>{{ employee.birthDate ? employee.birthDate|date('d/m/Y') : '' }}</td>
                 <td>{{ employee.salary | format_currency('GTQ') }}</td>
                 <td>
-                    <a href="{{ path('app_employee_show', {'id': employee.id}) }}">show</a>
-                    <a href="{{ path('app_employee_edit', {'id': employee.id}) }}">edit</a>
-                    <a href="{{ path('app_employee_achievement_index', { 'employeeId': employee.id }) }}"> Actividades  </a>
+                    <div>
+                        <a href="{{ path('app_employee_show', {'id': employee.id}) }}">show</a>
+                    </div>
+                    <div>
+                        <a href="{{ path('app_employee_edit', {'id': employee.id}) }}">edit</a>
+                    </div>
+                    <div>
+                        <a href="{{ path('app_employee_achievement_index', { 'employeeId': employee.id }) }}"> Actividades  </a>
+                    </div>
                 </td>
             </tr>
         {% else %}
