@@ -8,25 +8,42 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 class EmployeeAchievementType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        $maxDate = (new \DateTime())->modify('+1 day');
         $builder
-            ->add('description')
-            ->add('achievement_type', null, [
-                'label' => 'Logro'
+            ->add('description', null, [
+                'attr' => [
+                    'class' => 'form-control',
+                ]
+            ])
+            ->add('achievement_type', CheckboxType::class, [
+                'label' => 'Logro',
+                'required' => false, // Esto permite que el checkbox no sea obligatorio
+                'attr' => [
+                    'class' => 'custom-checkbox-wrapper'
+                ]
             ])
             ->add('achievement_date', null, [
                 'widget' => 'single_text',
+                'label' => 'Fecha',
+                'data' => $maxDate,
+                'attr' => [
+                    'class' => 'form-control',
+                    'max' => $maxDate->format("Y-m-d")
+                ]
             ])
             ->add('employee', EntityType::class, [
                 'class' => Employee::class,
                 'choice_label' => 'fullName',
                 'data' => $options['employee'],
                 'attr' => [
-                    'disabled' => true
+                    'disabled' => true,
+                    'class' => 'form-select'
                 ]
             ])
         ;
@@ -36,7 +53,10 @@ class EmployeeAchievementType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => EmployeeAchievement::class,
-            'employee' => null
+            'employee' => null,
+            'attr' => [
+                'class' => 'achievement-form', 
+            ],
         ]);
     }
 }

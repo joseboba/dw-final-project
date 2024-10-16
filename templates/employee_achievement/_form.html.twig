@@ -1,4 +1,52 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_start(form, { 'attr': {'novalidate': 'novalidate'} }) }}
+  
+
+    <div class="mt-3">
+        {{ "Descripción" }}
+        {{ form_widget(form.description) }}
+
+        {% if form.description.vars.errors|length > 0 %}
+            <div class="alert alert-danger pb-0 mt-2">
+                {{ form_errors(form.description) }}
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="mt-3">
+        {{ form_label(form.achievement_type) }}
+        {{ form_widget(form.achievement_type) }}
+
+        {% if form.achievement_type.vars.errors|length > 0 %}
+            <div class="alert alert-danger pb-0 mt-2">
+                {{ form_errors(form.achievement_type) }}
+            </div>
+        {% endif %}
+    </div>
+
+     <div class="mt-3">
+        {{ "Fecha" }}
+        {{ form_widget(form.achievement_date) }}
+
+        {% if form.achievement_date.vars.errors|length > 0 %}
+            <div class="alert alert-danger pb-0 mt-2">
+                {{ form_errors(form.achievement_date) }}
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="mt-3">
+        {{ "Empleado" }}
+        {{ form_widget(form.employee) }}
+
+        {% if form.employee.vars.errors|length > 0 %}
+            <div class="alert alert-danger pb-0 mt-2">
+                {{ form_errors(form.employee) }}
+            </div>
+        {% endif %}
+    </div>
+
+
+    <div class="save-button">
+        <button class="btn btn-dark">{{ button_label|default('Guardar') }}</button>
+    </div>
 {{ form_end(form) }}

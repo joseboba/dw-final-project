@@ -12,7 +12,12 @@ class StoreType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name')
+            ->add('name',null, [
+                'label' => 'Nombre',
+                'attr' => [
+                    'class' => 'form-control'
+                ]
+            ])
         ;
     }
 
@@ -20,6 +25,9 @@ class StoreType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Store::class,
+            'attr' => [
+                'class' => 'forms', 
+            ],
         ]);
     }
 }

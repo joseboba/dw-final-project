@@ -12,7 +12,11 @@ class PositionsType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name')
+            ->add('name',null, [
+                'attr' => [
+                    'class' => 'form-control'
+                ]
+            ])
         ;
     }
 
@@ -20,6 +24,9 @@ class PositionsType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Positions::class,
+            'attr' => [
+                'class' => 'forms', 
+            ],
         ]);
     }
 }

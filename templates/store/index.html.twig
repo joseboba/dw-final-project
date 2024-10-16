@@ -1,13 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Store index{% endblock %}
+{% block title %}Tiendas{% endblock %}
 
 {% block body %}
 
     <h1>Tiendas</h1>
 
-    <table class="table">
-        <thead class="table-primary">
+    {% if stores|length > 0 %}
+        <table class="table ">
+        <thead>
         <tr>
             <th>Identificador</th>
             <th>Tienda</th>
@@ -20,23 +21,32 @@
                 <td>{{ store.id }}</td>
                 <td>{{ store.name }}</td>
                 <td>
-                    <a href="{{ path('app_store_show', {'id': store.id}) }}">show</a>
-                    <a href="{{ path('app_store_edit', {'id': store.id}) }}">edit</a>
+                
+                    <a class="eye" href="{{ path('app_store_show', {'id': store.id}) }}">{{ ux_icon('ion:eye-outline') }}</a>
+                    <a href="{{ path('app_store_edit', {'id': store.id}) }}">{{ ux_icon('ion:create-outline') }}</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="3">no records found</td>
+                <td colspan="3">No se encontraron registros</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
+    {% else %}
+        <div class="not-found-data">
+            <img src="{{ asset('images/store.png') }}" alt="No se encontraron registros">
+            <p>No hay tiendas registradas.</p>
+        </div>
+    {% endif %}
 
-    <div>
-        <a href="{{ path('app_store_new') }}">Create new</a>
+    <div class="button-container">
+        <button type="button" class="btn btn-dark">
+         <a href="{{ path('app_store_new') }}">Ingresar tienda</a>
+        </button>
+         <button type="button" class="btn btn-dark">
+          <a href="{{ path('app_index') }}"> Regresar </a>
+        </button>
     </div>
-    <div>
-        <a href="{{ path('app_index') }}"> Regresar </a>
-    </div>
-
+    
 {% endblock %}

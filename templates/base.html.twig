@@ -18,7 +18,7 @@
 
     {% set excludedRoutes = ['app_employee_pdf_index', 'app_store_pdf_index', 'app_employee_achievement_all_pdf', 'app_employee_achievements_pdf', 'app_employee_detail_pdf'] %}
     {% if app.request.attributes.get('_route') not in excludedRoutes %}
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <nav class="navbar navbar-expand-lg navbar-dark ">
             <div class="container-fluid">
                 <a class="navbar-brand">Intelafix</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,8 +35,32 @@
         </nav>
     {% endif %}
 
-        <div class="p-5">
+        <div class="p-3" id="main">
             {% block body %}{% endblock %}
+
+            {% if app.request.attributes.get('_route') == 'app_index' %}
+                <h1 class="title">Intelafix</h1>
+                <h2 class="subtitle">La tecnología al alcance de tu mano.</h2>
+
+                <div id="carouselExample" class="carousel slide carousel-fade" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active" data-bs-interval="3000">
+                            <img src={{asset("images/slide-1.jpg")}} class="d-block w-100" alt="Slide 1">
+                        </div>
+                        <div class="carousel-item" data-bs-interval="3000">
+                            <img src={{asset("images/slide-2.jpg")}} class="d-block w-100" alt="Slide 2">
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            {% endif %}
         </div>
     </body>
 </html>
