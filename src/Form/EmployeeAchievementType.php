@@ -14,7 +14,6 @@ class EmployeeAchievementType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $maxDate = (new \DateTime())->modify('+1 day');
         $builder
             ->add('description', null, [
                 'attr' => [
@@ -31,10 +30,10 @@ class EmployeeAchievementType extends AbstractType
             ->add('achievement_date', null, [
                 'widget' => 'single_text',
                 'label' => 'Fecha',
-                'data' => $maxDate,
+                'data' => new \DateTime(),
                 'attr' => [
                     'class' => 'form-control',
-                    'max' => $maxDate->format("Y-m-d")
+                    'max' => (new \DateTime())->format('Y-m-d\TH:i')
                 ]
             ])
             ->add('employee', EntityType::class, [

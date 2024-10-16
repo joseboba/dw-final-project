@@ -24,7 +24,7 @@
     </div>
 
      <div class="mt-3">
-        {{ "Fecha" }}
+        {{ form_label(form.achievement_date) }}
         {{ form_widget(form.achievement_date) }}
 
         {% if form.achievement_date.vars.errors|length > 0 %}

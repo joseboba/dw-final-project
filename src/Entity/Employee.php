@@ -32,7 +32,7 @@ class Employee
 
     #[ORM\Column(type: Types::DECIMAL, precision: 18, scale: 2)]
     #[Assert\NotBlank(message: 'El salario es requerido')]
-    #[Assert\Range(min: 1, minMessage: 'El salario debe ser al menos de Q3,000.00')]
+    #[Assert\Range(min: 3000, minMessage: 'El salario debe ser al menos de Q3,000.00')]
     private ?string $salary = null;
 
     #[ORM\ManyToOne(inversedBy: 'employees')]

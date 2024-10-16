@@ -6,6 +6,7 @@ use App\Repository\StoreRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: StoreRepository::class)]
 class Store
@@ -16,6 +17,13 @@ class Store
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'El nombre es requerido')]
+    #[Assert\Length(
+        min: 3,
+        max: 255,
+        minMessage: 'El nombre necesita al menos 3 cáracteres',
+        maxMessage: 'El nombre puede ser máximo de 255 cáracteres'
+    )]
     private ?string $name = null;
 
     /**

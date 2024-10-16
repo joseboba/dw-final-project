@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\EmployeeAchievementRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: EmployeeAchievementRepository::class)]
 class EmployeeAchievement
@@ -15,6 +16,13 @@ class EmployeeAchievement
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'La description es requerida')]
+    #[Assert\Length(
+        min: 10,
+        max: 255,
+        minMessage: 'La description necesita al menos 10 cáracteres',
+        maxMessage: 'La description puede ser máximo de 255 cáracteres'
+    )]
     private ?string $description = null;
 
     #[ORM\Column]
