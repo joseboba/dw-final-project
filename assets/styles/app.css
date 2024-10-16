@@ -1,7 +1,3 @@
-/* img {
-    max-width: 150px;
-    height: auto;
-} */
 
 body {
     background-color: #ECEFF1;
@@ -48,6 +44,8 @@ table {
 
     tr, td {
         background-color: white !important;
+        text-align: center;
+        font-weight: bold;
     }
 }
 
@@ -117,4 +115,103 @@ table {
 
 .buttons {
     background-color: #173341 !important;
+    color: white;
+    font-weight: bold;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+
+    svg {
+        color: #173341 !important;
+        width: 29px;
+    }
+}
+
+.eye {
+    svg {
+        margin-top: 3px;
+    }
+} 
+
+.forms {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    button {
+        width: 157.6px;
+        color: white;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+}
+
+.delete-button {
+    width: 157.6px;
+    color: white;
+    font-weight: bold;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 7px;
+
+    svg {
+        width: 29px;
+    }
+}
+
+.save-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+   
+
+    button {
+        width: 157.6px;
+        color: white;
+        font-weight: bold;
+        margin-bottom: 10px;
+        background-color: #173341 !important;
+    }
+}
+
+.employee-image {
+    max-width: 130px;
+    height: auto;
+}   
+
+.achievement-form {
+    width: 458px !important;
+}
+
+.custom-checkbox-wrapper {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.custom-checkbox-wrapper label {
+    margin-right: 10px; /* Espacio entre el texto y el checkbox */
+}
+
+input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer; /* Cambia el cursor cuando pasas sobre el checkbox */
+}
+
+
+.delete-icon {
+    background-color: transparent;
+    border: transparent;
+    svg {
+      width: 29px;
+      color: red;     
+    }
 }

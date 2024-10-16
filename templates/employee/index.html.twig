@@ -1,12 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Employee index{% endblock %}
+{% block title %}Empleados{% endblock %}
 
 {% block body %}
     <h1>Empleados</h1>
 
     {% if employees|length > 0 %}
-        <table class="table table-hover">
+        <table class="table">
             <thead>
                 <tr>
                     <th>Imagen</th>
@@ -20,20 +20,16 @@
             <tbody>
             {% for employee in employees %}
                 <tr>
-                    <td> <img src="{{ employee.pictureUrl }}" alt="" /> </td>
+                    <td> <img class="employee-image" src="{{ employee.pictureUrl }}" alt="" /> </td>
                     <td>{{ employee.id }}</td>
                     <td>{{ employee.fullName }}</td>
                     <td>{{ employee.birthDate ? employee.birthDate|date('d/m/Y') : '' }}</td>
                     <td>{{ employee.salary | format_currency('GTQ') }}</td>
                     <td>
+                        <a class="eye" href="{{ path('app_employee_show', {'id': employee.id}) }}">{{ ux_icon('ion:eye-outline') }}</a>
+                        <a href="{{ path('app_employee_edit', {'id': employee.id}) }}">{{ ux_icon('ion:create-outline') }}</a>
                         <div>
-                            <a href="{{ path('app_employee_show', {'id': employee.id}) }}">show</a>
-                        </div>
-                        <div>
-                            <a href="{{ path('app_employee_edit', {'id': employee.id}) }}">edit</a>
-                        </div>
-                        <div>
-                            <a href="{{ path('app_employee_achievement_index', { 'employeeId': employee.id }) }}"> Actividades  </a>
+                            <a href="{{ path('app_employee_achievement_index', { 'employeeId': employee.id }) }}"> Actividades {{ ux_icon('ion:reader-outline') }} </a>
                         </div>
                     </td>
                 </tr>
@@ -56,16 +52,16 @@
           <a href="{{ path('app_employee_new') }}">Ingresar empleado</a>
         </button>
         <button type="button" class="btn btn-dark">
-            <a href="{{ path('app_employee_pdf_index') }}">Pdf</a>
+            <a href="{{ path('app_employee_pdf_index') }}">Reporte general</a>
         </button>
         <button type="button" class="btn btn-dark">
-            <a href="{{ path('app_employee_achievement_all_pdf') }}">Pdf actividades</a>
+            <a href="{{ path('app_employee_achievement_all_pdf') }}">Reporte actividades</a>
         </button>
         <button type="button" class="btn btn-dark">
-            <a href="{{ path('app_employee_achievements_pdf') }}">Pdf logros</a>
+            <a href="{{ path('app_employee_achievements_pdf') }}">Reporte logros</a>
         </button>
         <button type="button" class="btn btn-dark">
-            <a href="{{ path('app_employee_warnings_pdf') }}">Pdf llamadas de atención</a>
+            <a href="{{ path('app_employee_warnings_pdf') }}">Reporte llamadas de atención</a>
         </button>
     </div>
     <div class="button-container" style="margin-top: 20px">

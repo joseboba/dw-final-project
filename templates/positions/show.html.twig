@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Positions{% endblock %}
+{% block title %}Puesto{% endblock %}
 
 {% block body %}
     <h1>Puestos</h1>
 
-    <table class="table table-hover">
+    <table class="table">
         <tbody>
             <tr>
                 <th>Id</th>
@@ -18,9 +18,14 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_positions_index') }}">back to list</a>
-
-    <a href="{{ path('app_positions_edit', {'id': position.id}) }}">edit</a>
+    <div class="button-container">
+        <button type="button" class="btn btn-dark">
+            <a href="{{ path('app_positions_index') }}"> Regresar a la lista </a>
+        </button>
+        <button type="button" class="btn btn-dark">
+           <a href="{{ path('app_positions_edit', {'id': position.id}) }}">Editar</a>
+        </button>
+    </div>
 
     {{ include('positions/_delete_form.html.twig') }}
 {% endblock %}

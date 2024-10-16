@@ -1,7 +1,7 @@
 {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
 
    <div class="input">
-        {{ form_label(form.name) }}
+        {{ "Nombre" }}
         {{ form_widget(form.name) }}
 
         {% if form.name.vars.errors|length > 0 %}
@@ -11,5 +11,5 @@
         {% endif %}
     </div>
     
-    <button class="btn btn-dark" style="margin-top: 20px">{{ button_label|default('Guardar') }}</button>
+    <button class="btn btn-dark buttons" style="margin-top: 20px">{{ button_label|default('Guardar') }}</button>
 {{ form_end(form) }}

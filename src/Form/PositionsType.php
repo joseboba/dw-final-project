@@ -24,6 +24,9 @@ class PositionsType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Positions::class,
+            'attr' => [
+                'class' => 'forms', 
+            ],
         ]);
     }
 }
