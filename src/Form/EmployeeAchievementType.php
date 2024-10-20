@@ -38,7 +38,7 @@ class EmployeeAchievementType extends AbstractType
             ])
             ->add('employee', EntityType::class, [
                 'class' => Employee::class,
-                'choice_label' => 'fullName',
+                'choice_label' => 'name',
                 'data' => $options['employee'],
                 'attr' => [
                     'disabled' => true,

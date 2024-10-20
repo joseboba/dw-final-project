@@ -16,9 +16,13 @@
                 <td>{{ employee.id }}</td>
             </tr>
            <tr>
-               <th>Nombre</th>
-               <td>{{ employee.fullName }}</td>
+               <th>Nombres</th>
+               <td>{{ employee.name }}</td>
            </tr>
+            <tr>
+                <th>Apellidos</th>
+                <td>{{ employee.lastname }}</td>
+            </tr>
             <tr>
                 <th>Fecha de nacimiento</th>
                 <td>{{ employee.birthDate ? employee.birthDate|date('d/m/Y') : '' }}</td>

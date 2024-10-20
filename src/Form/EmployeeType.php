@@ -33,7 +33,12 @@ class EmployeeType extends AbstractType
                     'class' => 'form-control',
                 ]
             ])
-            ->add('full_name', null, [
+            ->add('name', null, [
+                'attr' => [
+                    'class' => 'form-control',
+                ]
+            ])
+            ->add('lastname', null, [
                 'attr' => [
                     'class' => 'form-control',
                 ]

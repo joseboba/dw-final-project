@@ -40,7 +40,7 @@
         {% for actividad in activities %}
             <tr>
                 <td><img src="{{ actividad.employee.pictureUrl }}" alt="Foto" style="width: 50px; height: auto;"></td>
-                <td>{{ actividad.employee.fullName }}</td>
+                <td>{{ actividad.employee.name }}</td>
                 <td>{{ actividad.achievementType ? 'Logro' : 'Llamada de atención' }}</td>
                 <td>{{ actividad.achievementDate|date('H:m:s d/m/Y') }}</td>
             </tr>

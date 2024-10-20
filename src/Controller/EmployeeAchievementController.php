@@ -41,7 +41,7 @@ final class EmployeeAchievementController extends AbstractController
             ->createQueryBuilder('ea')
             ->join('ea.employee', 'e')
             ->addSelect('e')
-            ->orderBy('e.full_name', 'ASC')
+            ->orderBy('e.name', 'ASC')
             ->addOrderBy('ea.achievement_type', 'DESC')
             ->getQuery()
             ->getResult();
@@ -76,7 +76,7 @@ final class EmployeeAchievementController extends AbstractController
             ->join('ea.employee', 'e')
             ->addSelect('e')
             ->where('ea.achievement_type = 1')
-            ->orderBy('e.full_name', 'ASC')
+            ->orderBy('e.name', 'ASC')
             ->addOrderBy('ea.achievement_date', 'DESC')
             ->getQuery()
             ->getResult();
@@ -110,7 +110,7 @@ final class EmployeeAchievementController extends AbstractController
             ->join('ea.employee', 'e')
             ->addSelect('e')
             ->where('ea.achievement_type = 0')
-            ->orderBy('e.full_name', 'ASC')
+            ->orderBy('e.name', 'ASC')
             ->addOrderBy('ea.achievement_date', 'DESC')
             ->getQuery()
             ->getResult();

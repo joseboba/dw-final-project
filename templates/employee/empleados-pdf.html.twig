@@ -29,7 +29,7 @@
     <thead>
     <tr>
         <th>Fotografía</th>
-        <th>Nombre</th>
+        <th>Nombre Completo</th>
         <th>Salario</th>
         <th>Puesto</th>
         <th>Tienda</th>
@@ -40,7 +40,7 @@
     {% for empleado in empleados %}
         <tr>
             <td><img src="{{ empleado.pictureUrl }}" alt="Foto" style="width: 50px; height: auto;"></td>
-            <td>{{ empleado.fullName }}</td>
+            <td>{{ empleado.name }} {{ empleado.lastname }}</td>
             <td>{{ empleado.salary | format_currency('GTQ') }}</td>
             <td>{{ empleado.position.name }}</td>
             <td>{{ empleado.store.name }}</td>

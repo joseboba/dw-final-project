@@ -52,7 +52,10 @@ class Employee
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message: 'El nombre es requerido')]
     #[Assert\Length(min: 1, max: 100, maxMessage: 'Máximo 100 cáracteres')]
-    private ?string $full_name = null;
+    private ?string $name = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $lastname = null;
 
     public function __construct()
     {
@@ -166,14 +169,26 @@ class Employee
         return $this;
     }
 
-    public function getFullName(): ?string
+    public function getName(): ?string
     {
-        return $this->full_name;
+        return $this->name;
     }
 
-    public function setFullName(string $full_name): static
+    public function setName(string $name): static
     {
-        $this->full_name = $full_name;
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getLastname(): ?string
+    {
+        return $this->lastname;
+    }
+
+    public function setLastname(string $lastname): static
+    {
+        $this->lastname = $lastname;
 
         return $this;
     }

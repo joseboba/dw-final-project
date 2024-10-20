@@ -11,7 +11,8 @@
                 <tr>
                     <th>Imagen</th>
                     <th>Id</th>
-                    <th>Nombre</th>
+                    <th>Nombres</th>
+                    <th>Apellidos</th>
                     <th>Fecha de nacimiento</th>
                     <th>Salario</th>
                     <th>Acciones</th>
@@ -22,7 +23,8 @@
                 <tr>
                     <td> <img class="employee-image" src="{{ employee.pictureUrl }}" alt="" /> </td>
                     <td>{{ employee.id }}</td>
-                    <td>{{ employee.fullName }}</td>
+                    <td>{{ employee.name }}</td>
+                    <td>{{ employee.lastname }}</td>
                     <td>{{ employee.birthDate ? employee.birthDate|date('d/m/Y') : '' }}</td>
                     <td>{{ employee.salary | format_currency('GTQ') }}</td>
                     <td>
