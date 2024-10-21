@@ -1,12 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Actividades {{ type }}{% endblock %}
+{% block title %}Observaciones {{ type }}{% endblock %}
 {% block body %}
     <head>
         <meta charset="utf-8">
         <title>Lista de Empleados</title>
         <style>
             body {
+                margin: 0;
+                padding; 0;
                 font-family: sans-serif;
             }
 
@@ -26,14 +28,22 @@
         </style>
     </head>
     <body>
-    <h1>Lista de actividades de Empleados</h1>
+    {% if activities|length > 0 and activities|filter(activity => activity.achievementType)|length == activities|length %}
+        <h1>Lista de logros</h1>
+    {% elseif activities|length > 0 and activities|filter(activity => activity.achievementType == false)|length == activities|length %}
+         <h1>Lista de llamadas de atención</h1>
+    {% else %}
+       <h1>Lista de observaciones</h1>
+    {% endif %}
+    
     <table>
         <thead>
         <tr>
             <th>Fotografía</th>
             <th>Nombre</th>
-            <th>Actividad</th>
-            <th>Fecha y Hora de Actividad</th>
+            <th>Observación</th>
+            <th>Descripción</th>
+            <th>Hora y fecha</th>
         </tr>
         </thead>
         <tbody>
@@ -42,6 +52,7 @@
                 <td><img src="{{ actividad.employee.pictureUrl }}" alt="Foto" style="width: 50px; height: auto;"></td>
                 <td>{{ actividad.employee.fullName }}</td>
                 <td>{{ actividad.achievementType ? 'Logro' : 'Llamada de atención' }}</td>
+                <td>{{ actividad.description }}</td>
                 <td>{{ actividad.achievementDate|date('H:m:s d/m/Y') }}</td>
             </tr>
         {% endfor %}

@@ -29,7 +29,7 @@
                         <a class="eye" href="{{ path('app_employee_show', {'id': employee.id}) }}">{{ ux_icon('ion:eye-outline') }}</a>
                         <a href="{{ path('app_employee_edit', {'id': employee.id}) }}">{{ ux_icon('ion:create-outline') }}</a>
                         <div>
-                            <a href="{{ path('app_employee_achievement_index', { 'employeeId': employee.id }) }}"> Actividades {{ ux_icon('ion:reader-outline') }} </a>
+                            <a href="{{ path('app_employee_achievement_index', { 'employeeId': employee.id }) }}"> Observaciones {{ ux_icon('ion:reader-outline') }} </a>
                         </div>
                     </td>
                 </tr>
@@ -55,7 +55,7 @@
             <a href="{{ path('app_employee_pdf_index') }}">Reporte general</a>
         </button>
         <button type="button" class="btn btn-dark">
-            <a href="{{ path('app_employee_achievement_all_pdf') }}">Reporte actividades</a>
+            <a href="{{ path('app_employee_achievement_all_pdf') }}">Reporte observaciones</a>
         </button>
         <button type="button" class="btn btn-dark">
             <a href="{{ path('app_employee_achievements_pdf') }}">Reporte logros</a>

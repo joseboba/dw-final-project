@@ -188,7 +188,7 @@ a {
 }
 
 .employee-image {
-    max-width: 130px;
+    max-width: 100px;
     height: auto;
 }   
 
@@ -220,4 +220,10 @@ input[type="checkbox"] {
       width: 29px;
       color: red;     
     }
+}
+
+.group {
+    font-size: 17px;
+    font-weight: bold;
+    text-align: center;
 }

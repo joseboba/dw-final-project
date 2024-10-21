@@ -33,20 +33,20 @@
     <body>
     <h1>Empleado: {{ empleado.fullName }}</h1>
     <div>
-        <img src="{{ empleado.pictureUrl }}" alt="" />
+        <img src="{{ empleado.pictureUrl }}" alt=""  style="width: 200px; height: auto;"/>
     </div>
     <ul>
         <li>Salario: <b>{{ empleado.salary | format_currency('GTQ') }}</b></li>
         <li>Puesto: <b>{{ empleado.position.name }}</b></li>
         <li>Tienda: <b>{{ empleado.store.name }}</b></li>
-        <li>Cumpleaños: <b>{{ empleado.birthDate | date('d/m/Y') }}</b></li>
+        <li>Fecha de nacimiento: <b>{{ empleado.birthDate | date('d/m/Y') }}</b></li>
     </ul>
     <table>
         <thead>
         <tr>
-            <th>Tipo</th>
-            <th>Descripcion</th>
-            <th>Fecha actividad</th>
+            <th>Tipo de observación</th>
+            <th>Descripción</th>
+            <th>Hora y Fecha</th>
         </tr>
         </thead>
         <tbody>
