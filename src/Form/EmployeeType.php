@@ -58,7 +58,7 @@ class EmployeeType extends AbstractType
                 ]
             ])
             ->add('image', FileType::class, [
-                'label' => 'Selecciona una imagen',
+                'label' => 'Fotografía',
                 'mapped' => false,
                 'required' => $options['is_create'],
                 'constraints' => [
