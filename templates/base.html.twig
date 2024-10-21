@@ -20,7 +20,7 @@
     {% if app.request.attributes.get('_route') not in excludedRoutes %}
         <nav class="navbar navbar-expand-lg navbar-dark ">
             <div class="container-fluid">
-                <a class="navbar-brand">Intelafix</a>
+                <a class="navbar-brand" href="{{ path('app_index') }}">Intelafix</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -37,8 +37,14 @@
 
         <div class="p-3" id="main">
             {% block body %}{% endblock %}
-
             {% if app.request.attributes.get('_route') == 'app_index' %}
+                <h1>Proyecto Final - Desarrollo Web </h1>
+                <p class="group">
+                    Integrantes del grupo <br>
+                    José Enrique Salazar Bobadilla | 5190-21-893 <br>
+                    Javier Alejandro Barahona Pasán | 5190-21-3152 <br>
+                    Raúl Alfonso Galdámez Orellana | 5190-21-3565
+                </p>
                 <h1 class="title">Intelafix</h1>
                 <h2 class="subtitle">La tecnología al alcance de tu mano.</h2>
 
