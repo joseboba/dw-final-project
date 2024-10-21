@@ -16,12 +16,12 @@ class EmployeeAchievement
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: 'La description es requerida')]
+    #[Assert\NotBlank(message: 'La descripción es requerida')]
     #[Assert\Length(
         min: 10,
         max: 255,
-        minMessage: 'La description necesita al menos 10 cáracteres',
-        maxMessage: 'La description puede ser máximo de 255 cáracteres'
+        minMessage: 'La descripción necesita al menos 10 cáracteres',
+        maxMessage: 'La descripción puede ser máximo de 255 cáracteres'
     )]
     private ?string $description = null;
 
