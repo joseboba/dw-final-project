@@ -20,9 +20,9 @@ class Store
     #[Assert\NotBlank(message: 'El nombre es requerido')]
     #[Assert\Length(
         min: 3,
-        max: 255,
+        max: 100,
         minMessage: 'El nombre necesita al menos 3 cáracteres',
-        maxMessage: 'El nombre puede ser máximo de 255 cáracteres'
+        maxMessage: 'El nombre puede ser máximo de 100 cáracteres'
     )]
     private ?string $name = null;
 

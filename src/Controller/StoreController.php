@@ -83,6 +83,12 @@ final class StoreController extends AbstractController
     public function edit(Request $request, Store $store, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(StoreType::class, $store);
+        if ($request->getMethod() === 'POST') {
+            $formData = $request->request->all();
+            if (trim($formData['store']['name']) === "") {
+                $form = $this->createForm(StoreType::class, new Store());
+            }
+        }
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

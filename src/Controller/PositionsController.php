@@ -54,6 +54,12 @@ final class PositionsController extends AbstractController
     public function edit(Request $request, Positions $position, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(PositionsType::class, $position);
+        if ($request->getMethod() === 'POST') {
+            $formData = $request->request->all();
+            if (trim($formData['positions']['name']) === "") {
+                $form = $this->createForm(PositionsType::class, new Positions());
+            }
+        }
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

@@ -50,11 +50,13 @@ class Employee
     private Collection $employeeAchievements;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: 'El nombre es requerido')]
+    #[Assert\NotBlank(message: 'Los nombres son requeridos')]
     #[Assert\Length(min: 1, max: 100, maxMessage: 'Máximo 100 cáracteres')]
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'Los apellidos son requeridos')]
+    #[Assert\Length(min: 1, max: 100, maxMessage: 'Máximo 100 cáracteres')]
     private ?string $lastname = null;
 
     public function __construct()
@@ -186,7 +188,7 @@ class Employee
         return $this->lastname;
     }
 
-    public function setLastname(string $lastname): static
+    public function setLastname(?string $lastname): static
     {
         $this->lastname = $lastname;
 
