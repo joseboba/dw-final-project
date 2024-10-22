@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Employee;
 use App\Form\EmployeeType;
-use App\Repository\EmployeeAchievementRepository;
 use App\Repository\EmployeeRepository;
 use App\Service\CloudinaryService;
 use Doctrine\ORM\EntityManagerInterface;
@@ -43,7 +42,7 @@ final class EmployeeController extends AbstractController
 
         $html = $this->renderView('employee/empleados-pdf.html.twig', [
             'empleados' => $empleados,
-            'total' => (float) $total->getQuery()->getSingleScalarResult(),
+            'total' => (float)$total->getQuery()->getSingleScalarResult(),
         ]);
         $dompdf->loadHtml($html);
         $dompdf->setPaper('A4', 'portrait');
@@ -119,6 +118,18 @@ final class EmployeeController extends AbstractController
     public function edit(Request $request, Employee $employee, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(EmployeeType::class, $employee);
+
+        if ($request->getMethod() === "POST") {
+            $formData = $request->request->all();
+            $employeeFormData = $formData['employee'];
+
+            if (trim($employeeFormData['salary']) === "" ||
+                trim($employeeFormData['name']) === "" ||
+                trim($employeeFormData['lastname']) === ""
+            ) {
+                $form = $this->createForm(EmployeeType::class, new Employee());
+            }
+        }
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
